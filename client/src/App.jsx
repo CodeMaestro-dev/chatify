@@ -3,7 +3,7 @@ import { useState } from "react";
 import Chat from "./assets/components/Chat";
 import "./App.css";
 
-const socket = io.connect("http://localhost:3000");
+const socket = io.connect("https://chatify-j0kz.onrender.com");
 
 export default function App() {
   const [username, setUsername] = useState("");
