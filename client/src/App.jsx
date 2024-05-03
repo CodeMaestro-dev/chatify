@@ -3,7 +3,7 @@ import { useState } from "react";
 import Chat from "./assets/components/Chat";
 import "./App.css";
 
-const socket = io.connect("https://chatify-j0kz.onrender.com");
+const socket = io.connect(import.meta.env.VITE_API_URL);
 
 export default function App() {
   const [username, setUsername] = useState("");
@@ -38,7 +38,7 @@ export default function App() {
 
           <h3>Welcome to Chatify.</h3>
           <h4>
-            All you need to do is to type your name and the Room ID you wan't to
+            All you need to do is to type your name and the Room ID you wan&apos;t to
             join
           </h4>
           <input
