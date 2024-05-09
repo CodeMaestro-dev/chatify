@@ -44,8 +44,8 @@ export default function InvitedChat() {
         <div className="joinChatContainer">
           <h3>Welcome to Chatify.</h3>
           <p className="text-danger text-center">{error}</p>
-          <label htmlFor="userInvite">Your Username</label>
-          <form className="joinChatContainer">
+          <form className="joinChatContainer w-100 px-2">
+          <label htmlFor="userInvite" className="text-start w-100 mb-3 fw-bold">Your Username</label>
             <input
               type="text"
               placeholder="johndoe"
@@ -57,7 +57,7 @@ export default function InvitedChat() {
                 }
               }}
             />
-            <label htmlFor="room-name">Chat Room ID</label>
+            <label htmlFor="room-name" className="text-start w-100 mb-3 fw-bold">Chat Room ID</label>
             <input
               id="room-name"
               type="text"
@@ -68,7 +68,7 @@ export default function InvitedChat() {
                 }
               }}
             />
-            <button type="submit" onClick={submitForm}>
+            <button type="submit" onClick={submitForm} className="mb-5">
               Join A Room
             </button>
           </form>

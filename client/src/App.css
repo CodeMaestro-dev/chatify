@@ -68,6 +68,10 @@
   width: 100%;
 }
 
+input[type="submit"]:active,
+button[type="submit"]:active {
+  transform: scale(0.9);
+}
 
 .App {
   width: 100vw;
@@ -103,23 +107,23 @@ body {
   margin-block-end: 1rem;
 }
 .joinChatContainer input {
-  width: 210px;
-  height: 40px;
-  margin: 7px;
-  border: 2px solid var(--chatify-light-green);
-  border-radius: 5px;
-  padding: 5px;
-  font-size: 16px;
+  border: 1px solid var(--chatify-light-green);
+  border-radius: 30px;
+  padding-block: 12px;
+  padding-inline-start: 36px;
+  width: 100%;
 }
 
 .joinChatContainer button {
-  width: 225px;
+  width: 100%;
   height: 50px;
   margin: 7px;
+  margin-block-start: 15px;
   border: none;
-  border-radius: 5px;
-  padding: 5px;
+  border-radius: 30px;
   font-size: 16px;
+  padding-block: 12px;
+  width: 100%;
   background: var(--chatify-light-green);
   color: #fff;
   cursor: pointer;

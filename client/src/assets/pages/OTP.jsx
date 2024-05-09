@@ -1,17 +1,23 @@
 import "../../App.css";
-import { useState, useRef } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
-  const OTP_REF = useRef([]);
+  const navigate = useNavigate()
   const [OTP, setOTP] = useState(0);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [redirect, setRedirect] = useState(false);
+
+  if (redirect) {
+    navigate("/login");
+  }
 
   function userOTP(number) {
-    setOTP(number)
+    setOTP(number);
   }
-  
-  function errorText(text) {
+
+  function errorText(text) { 
     setError(text);
   }
 
@@ -38,7 +44,7 @@ export default function Signup() {
     const RESULT = await RESPONSE.json();
     if (RESPONSE.status === 200) {
       setTimeout(() => {
-        window.location.href = "./login";
+        setRedirect(true);
       }, 3000);
       successText(RESULT.message);
     } else {
@@ -49,12 +55,12 @@ export default function Signup() {
   return (
     <>
       <form className="container d-flex  flex-column  align-items-center mb-5 ">
-        <div>
+        <div className="w-100">
           <p className="text-center">Code has being sent to your email</p>
           <p className="text-danger text-center">{error}</p>
           <p className="text-success text-center">{success}</p>
 
-          <div className="d-flex gap-2 mb-4 div-otp">
+          <div className="d-flex gap-2 mb-4 div-otp w-100">
             <input
               type="number"
               name=""

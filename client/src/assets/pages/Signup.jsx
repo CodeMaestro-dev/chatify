@@ -1,6 +1,6 @@
 import "../../App.css";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState} from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const [input, setInput] = useState("");
@@ -8,6 +8,12 @@ export default function Signup() {
   const [username, setUsername] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [redirect, setRedirect] = useState(false);
+  const navigate = useNavigate();
+
+  if (redirect) {
+    navigate("/otp");
+  }
 
   function inputText(text) {
     setInput(text);
@@ -31,26 +37,29 @@ export default function Signup() {
 
   async function submitForm(e) {
     e.preventDefault();
-    setSuccess('')
-    setError('')
-    const RESPONSE = await fetch(`${import.meta.env.VITE_API_URL}/api/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: username,
-        email: input,
-        password: password,
-      }),
-    });
+    setSuccess("");
+    setError("");
+    const RESPONSE = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/register`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: username,
+          email: input,
+          password: password,
+        }),
+      }
+    );
 
     const RESULT = await RESPONSE.json();
     if (RESPONSE.status === 200) {
       setTimeout(() => {
-        window.location.href = "./otp";
+        setRedirect(true);
       }, 3000);
-      successText(RESULT.message)
+      successText(RESULT.message);
     } else {
       console.log(RESULT.error);
       errorText(RESULT.error);

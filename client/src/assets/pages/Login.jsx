@@ -1,14 +1,20 @@
 import "../../App.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [redirect, setRedirect] = useState(false);
+  const navigate = useNavigate()
 
-  localStorage.setItem("username", username)
+  localStorage.setItem("username", username);
+
+  if (redirect) {
+    navigate("/chat");
+  }
 
   function passwordText(text) {
     setPassword(text);
@@ -29,8 +35,8 @@ export default function Signup() {
   async function submitForm(e) {
     e.preventDefault();
 
-    setSuccess('')
-    setError('')
+    setSuccess("");
+    setError("");
 
     const RESPONSE = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
       method: "POST",
@@ -45,7 +51,7 @@ export default function Signup() {
     const RESULT = await RESPONSE.json();
     if (RESPONSE.status === 200) {
       setTimeout(() => {
-        window.location.href = "./chat";
+        setRedirect(true);
       }, 3000);
       successText(RESULT.message);
     } else {

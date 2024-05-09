@@ -4,7 +4,7 @@ import Chat from "./Chat";
 import "../../App.css";
 
 const socket = io.connect(import.meta.env.VITE_API_URL);
-console.log(`${import.meta.env.VITE_API_URL}/api/user-invite`)
+console.log(`${import.meta.env.VITE_API_URL}/api/user-invite`);
 export default function EnterChat() {
   const [userInvite, setUserInvite] = useState("");
   const [room, setRoom] = useState("");
@@ -25,16 +25,19 @@ export default function EnterChat() {
     e.preventDefault();
     setSuccess("");
     setError("");
-    const RESPONSE = await fetch(`${import.meta.env.VITE_API_URL}/api/user-invite`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        invitedUser: userInvite,
-        roomId: room,
-      }),
-    });
+    const RESPONSE = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/user-invite`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          invitedUser: userInvite,
+          roomId: room,
+        }),
+      }
+    );
     const RESULT = await RESPONSE.json();
 
     if (RESPONSE.status == 200) {
@@ -53,8 +56,8 @@ export default function EnterChat() {
           <h3>Welcome to Chatify.</h3>
           <p className="text-danger text-center">{error}</p>
           <p className="text-success text-center">{success}</p>
-          <label htmlFor="userInvite">Invitees&apos; Username</label>
-          <form className="joinChatContainer">
+          <form className="joinChatContainer w-100 px-2">
+            <label htmlFor="userInvite" className="text-start w-100 mb-3 fw-bold">Invitees&apos; Username</label>
             <input
               type="text"
               placeholder="johndoe"
@@ -66,7 +69,7 @@ export default function EnterChat() {
                 }
               }}
             />
-            <label htmlFor="room-name">Chat Room ID</label>
+            <label htmlFor="room-name" className="text-start w-100 mb-3 fw-bold">Chat Room ID</label>
             <input
               id="room-name"
               type="text"
@@ -77,7 +80,7 @@ export default function EnterChat() {
                 }
               }}
             />
-            <button onClick={submitForm}>Join A Room</button>
+            <button onClick={submitForm} className="mb-5">Join A Room</button>
           </form>
         </div>
       ) : (
