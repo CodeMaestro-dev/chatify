@@ -21,7 +21,7 @@ app.use(
 );
 app.use(cors());
 const server = http.createServer(app);
-
+app.use(express.static(path.join(__dirname, 'build')));
 // Linking to Database
 mongoose
   .connect(process.env.MONGODB_URI)
@@ -256,6 +256,8 @@ app.post("/api/user-invite", async (req, res) => {
 
 // user invite
 app.get("/api/chat/:id", async (req, res)=> {
+
+  res.redirect(301, '/chat/*');
 
   res.status(200).json({
     status: "ok",
