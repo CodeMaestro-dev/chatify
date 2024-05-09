@@ -9,17 +9,33 @@ export default function InvitedChat() {
   const [userInvite, setUserInvite] = useState("");
   const [room, setRoom] = useState("");
   const [showChat, setShowChat] = useState(false);
+  const [error, setError] = useState("");
 
-  const joinRoom = () => {
-    if (userInvite !== "" && room !== "") {
-      socket.emit("join_room", room);
-      setShowChat(true);
-    }
-  };
+  function errorText(text) {
+    setError(text);
+  }
 
   async function submitForm(e) {
     e.preventDefault();
-    joinRoom()
+
+    const RESPONSE = await fetch(`${import.meta.env.VITE_API_URL}/api/user-invite`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: userInvite,
+      }),
+    });
+
+    const RESULT = RESPONSE.json();
+
+    if (RESPONSE.status === 200) {
+      socket.emit("join_room", room);
+      setShowChat(true);
+    } else {
+      errorText(RESULT.error);
+    }
   }
 
   return (
@@ -27,6 +43,7 @@ export default function InvitedChat() {
       {!showChat ? (
         <div className="joinChatContainer">
           <h3>Welcome to Chatify.</h3>
+          <p className="text-danger text-center">{error}</p>
           <label htmlFor="userInvite">Your Username</label>
           <form className="joinChatContainer">
             <input
@@ -51,7 +68,9 @@ export default function InvitedChat() {
                 }
               }}
             />
-            <button type="submit" onClick={submitForm}>Join A Room</button> 
+            <button type="submit" onClick={submitForm}>
+              Join A Room
+            </button>
           </form>
         </div>
       ) : (

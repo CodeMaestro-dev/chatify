@@ -33,7 +33,7 @@ export default function Signup() {
     e.preventDefault();
     setSuccess('')
     setError('')
-    const RESPONSE = await fetch("http://localhost:3000/api/register", {
+    const RESPONSE = await fetch(`${import.meta.env.VITE_API_URL}/api/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

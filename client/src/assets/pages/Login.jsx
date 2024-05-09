@@ -32,7 +32,7 @@ export default function Signup() {
     setSuccess('')
     setError('')
 
-    const RESPONSE = await fetch("http://localhost:3000/api/login", {
+    const RESPONSE = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -49,7 +49,6 @@ export default function Signup() {
       }, 3000);
       successText(RESULT.message);
     } else {
-      console.log(RESULT.error);
       errorText(RESULT.error);
     }
   }

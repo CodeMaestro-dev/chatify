@@ -4,7 +4,7 @@ import Chat from "./Chat";
 import "../../App.css";
 
 const socket = io.connect(import.meta.env.VITE_API_URL);
-
+console.log(`${import.meta.env.VITE_API_URL}/api/user-invite`)
 export default function EnterChat() {
   const [userInvite, setUserInvite] = useState("");
   const [room, setRoom] = useState("");
@@ -25,7 +25,7 @@ export default function EnterChat() {
     e.preventDefault();
     setSuccess("");
     setError("");
-    const RESPONSE = await fetch("http://localhost:3000/api/user-invite", {
+    const RESPONSE = await fetch(`${import.meta.env.VITE_API_URL}/api/user-invite`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
