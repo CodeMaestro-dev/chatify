@@ -1,5 +1,0 @@
-RewriteEngine On
-
-# Redirect any non-existent routes to the /chat/* route
-RewriteCond %{REQUEST_URI} !^/(chat|signup|login|otp)/?.*$
-RewriteRule ^.*$ /chat/* [R=301,L]
