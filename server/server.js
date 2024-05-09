@@ -21,7 +21,6 @@ app.use(
 );
 app.use(cors());
 const server = http.createServer(app);
-app.use(express.static(path.join(__dirname, 'build')));
 // Linking to Database
 mongoose
   .connect(process.env.MONGODB_URI)
