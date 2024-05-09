@@ -1,5 +1,6 @@
 import io from "socket.io-client";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import Chat from "./Chat";
 import "../../App.css";
 
@@ -10,6 +11,8 @@ export default function InvitedChat() {
   const [room, setRoom] = useState("");
   const [showChat, setShowChat] = useState(false);
   const [error, setError] = useState("");
+
+  const {id} = useParams();
 
   function errorText(text) {
     setError(text);

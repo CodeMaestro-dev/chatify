@@ -17,8 +17,7 @@ export default function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/otp" element={<OTP />} />
-        <Route path="/chat/invited-chat" element={<InvitedChat />} />
-        <Route path="/chat/*" element={<Navigate to="/chat/invited-chat" />} />
+        <Route path="/chat/:id" element={<InvitedChat />} />
       </Routes>
     </>
   );
