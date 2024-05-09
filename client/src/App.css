@@ -1,8 +1,76 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --chatify-light-green: #31c48d;
+}
+
+.home-page {
+  width: 100%;
+  margin-block: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 100px;
+}
+
+.spinner {
+  animation: rotate 2s linear infinite;
+  z-index: 2;
+  width: 50px;
+  height: 50px;
+
+  & .path {
+    stroke: var(--chatify-light-green);
+    stroke-linecap: round;
+    animation: dash 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+
+.btn-chatify {
+  background: var(--chatify-light-green) !important;
+}
+
+.border-chatify {
+  border: 1px solid var(--chatify-light-green);
+}
+
+.signup-input {
+  padding-block: 12px;
+  padding-inline-start: 36px;
+  width: 100%;
+}
+
+
 .App {
   width: 100vw;
-  height: 100vh;
   background: #fff;
   color: #212121;
   font-family: "Open Sans", sans-serif;
@@ -22,8 +90,8 @@ body {
 }
 
 .svg {
-  width: 100px;
-  color: #615ef0;
+  width: 150px;
+  color: var(--chatify-light-green);
 }
 
 .joinChatContainer h3 {
@@ -38,7 +106,7 @@ body {
   width: 210px;
   height: 40px;
   margin: 7px;
-  border: 2px solid #615ef0;
+  border: 2px solid var(--chatify-light-green);
   border-radius: 5px;
   padding: 5px;
   font-size: 16px;
@@ -52,13 +120,13 @@ body {
   border-radius: 5px;
   padding: 5px;
   font-size: 16px;
-  background: #615ef0;
+  background: var(--chatify-light-green);
   color: #fff;
   cursor: pointer;
 }
 
 .joinChatContainer button:hover {
-  background: #615ef0;
+  background: var(--chatify-light-green);
 }
 
 .chat-window {
@@ -112,7 +180,7 @@ body {
   height: auto;
   min-height: 40px;
   max-width: 120px;
-  background-color: #615ef0;
+  background-color: var(--chatify-light-green);
   border-radius: 5px;
   color: white;
   display: flex;
@@ -195,8 +263,18 @@ body {
 }
 
 .chat-window .chat-footer button:hover {
-  color: #615ef0;
+  color: var(--chatify-light-green);
 }
 .hide {
   opacity: 0 !important;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
 }
