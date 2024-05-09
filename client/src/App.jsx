@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./assets/components/Home";
 import EnterChat from "./assets/components/EnterChat";
 import Login from "./assets/pages/Login";
@@ -18,6 +18,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/otp" element={<OTP />} />
         <Route path="/chat/*" element={<InvitedChat />} />
+        <Route path="*" element={<Navigate to="/chat/*" />} />
       </Routes>
     </>
   );

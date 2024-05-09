@@ -70,6 +70,7 @@ function generateOTP() {
     charset: "numeric",
   });
 }
+
 // generating otp logic
 
 // otp sending logic
@@ -108,7 +109,7 @@ function sendInvitation(username, inviteEmail, roomId) {
     from: username,
     to: inviteEmail,
     subject: "Chatify Invitation", 
-    text: "@" + username + " is inviting you too a Chatify chat at " + roomId + "use this link to join: http://localhost:5173/chat/" + roomId,
+    text: `@${username} is inviting you to a Chatify chat at ${roomId}. Use this link to join the chat: ${process.env.CLIENT_URI}/chat/${randomstring.generate(10)}`
   };
 
   let transporter = nodemailer.createTransport({
@@ -229,7 +230,8 @@ app.post("/api/user-invite", async (req, res) => {
   const { invitedUser, roomId } = req.body;
 
   const user = await User.findOne({ username:invitedUser }).lean();
-  
+
+  console.log(invitedUser)
 
   if (!user) {
     res.status(400).json({
