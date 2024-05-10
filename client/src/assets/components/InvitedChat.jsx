@@ -21,7 +21,7 @@ export default function InvitedChat() {
   async function submitForm(e) {
     e.preventDefault();
 
-    const RESPONSE = await fetch(`${import.meta.env.VITE_API_URL}/api/user-invite`, {
+    const RESPONSE = await fetch(`${import.meta.env.VITE_API_URL}/api/invited-username`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
