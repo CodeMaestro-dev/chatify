@@ -5,13 +5,14 @@ import "../../App.css";
 
 const socket = io.connect(import.meta.env.VITE_API_URL);
 console.log(`${import.meta.env.VITE_API_URL}/api/user-invite`);
+const username = localStorage.getItem("username");
+
 export default function EnterChat() {
   const [userInvite, setUserInvite] = useState("");
   const [room, setRoom] = useState("");
   const [showChat, setShowChat] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const username = localStorage.getItem("username");
 
   function errorText(text) {
     setError(text);
@@ -34,6 +35,7 @@ export default function EnterChat() {
         },
         body: JSON.stringify({
           invitedUser: userInvite,
+          username: username,
           roomId: room,
         }),
       }

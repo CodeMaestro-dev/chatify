@@ -226,7 +226,7 @@ app.post("/api/login", async (req, res) => {
 
 // user query
 app.post("/api/user-invite", async (req, res) => {
-  const { invitedUser, roomId } = req.body;
+  const { invitedUser, username, roomId } = req.body;
 
   const user = await User.findOne({ username:invitedUser }).lean();
 
@@ -242,7 +242,7 @@ app.post("/api/user-invite", async (req, res) => {
   if (user) {
     const INVITEE_EMAIL = user.email
 
-    sendInvitation(invitedUser, INVITEE_EMAIL,  roomId)
+    sendInvitation(username, INVITEE_EMAIL,  roomId)
 
     res.status(200).json({
       status: "ok",
